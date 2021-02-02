@@ -1,3 +1,0 @@
-FROM       ubuntu:16.04
-MAINTAINER Byeongmin Ryoo <21600220@handong.edu>
-RUN        apt-get -y update
