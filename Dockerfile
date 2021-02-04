@@ -19,3 +19,6 @@ RUN apt-get -y -qq install locales \
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
+
+RUN set -xe \ 
+    && apt -y -qq install vim tmux perl wget tar man sudo adduser netstat-nat net-tools curl w3m git build-essential xxd file make libcurses-perl python python3-pip zlib1g libjpeg8-dev zlib1g-dev
