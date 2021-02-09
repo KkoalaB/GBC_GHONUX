@@ -3,22 +3,39 @@ LABEL   authors="Byeongmin Ryoo <21600220@handong.edu>, Seungjun Baek <21900346@
 
 # basic update & upgrade
 RUN set -xe \
-    && apt-get -y -qq update \
-    && apt-get -y -qq upgrade
+    && apt -y -qq update \
+    && apt -y -qq upgrade
 
 # set time zone
 RUN set -xe \
-    && apt-get -y -qq install tzdata
+    && apt -y -qq install tzdata
 ENV TZ=Asia/Seoul
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
     && echo $TZ > /etc/timezone
 
 # set locale UTF-8
-RUN apt-get -y -qq install locales \
+RUN apt -y -qq install locales \
     && locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
+## install extensions ##
+# vim: text editor
+# tmux: split screen
+# wget: file downloader
+# man: linux manual
+# sudo: superuser do
+# net-tools: network tools (ifconfig etc...)
+# git: git
+# build-essential: generaly used packages for building source codes
+# libcurses-perl: libraries for perl
+# python: python
+# python-pip: python library downloader (pip)
+# python3: python3
+# python3-pip: python library downloader (pip3)
 RUN set -xe \ 
-    && apt -y -qq install vim tmux perl wget tar man sudo adduser netstat-nat net-tools curl w3m git build-essential xxd file make libcurses-perl python python3-pip zlib1g libjpeg8-dev zlib1g-dev
+    && apt -y -qq install vim tmux wget tar man sudo net-tools git build-essential libcurses-perl python python-pip python3 python3-pip curl zsh nano \
+    && wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
+
+CMD ["zsh"]
