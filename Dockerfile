@@ -48,6 +48,8 @@ RUN /root/pwndbg/setup.sh
 WORKDIR "/root"
 RUN pip install ropgadget
 
+# bof
+
 # oh-my-zsh (Shell theme)
 RUN set -xe \
     && apt -y -qq install zsh nano \
