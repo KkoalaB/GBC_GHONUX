@@ -37,9 +37,10 @@ ENV LC_ALL en_US.UTF-8
 # curl: transferring data from or to a server designed to work without user interaction
 RUN set -xe \ 
     && apt -y -qq install vim tmux wget tar man sudo net-tools git build-essential libcurses-perl python python-pip python3 python3-pip curl
-    
+
+# oh-my-zsh (Shell theme)
 RUN set -xe \
-    && zsh nano \
+    && apt -y -qq install zsh nano \
     && wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
 
 CMD ["zsh"]
