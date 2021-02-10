@@ -38,6 +38,18 @@ ENV LC_ALL en_US.UTF-8
 RUN set -xe \ 
     && apt -y -qq install vim tmux wget tar man sudo net-tools git build-essential libcurses-perl python python-pip python3 python3-pip curl
 
+## For GBC_Secruity ##
+# pwndbg
+WORKDIR "/root"
+RUN git clone https://github.com/pwndbg/pwndbg
+RUN /root/pwndbg/setup.sh
+    
+# ROPgadget
+WORKDIR "/root"
+RUN pip install ropgadget
+
+# bof
+
 # oh-my-zsh (Shell theme)
 RUN set -xe \
     && apt -y -qq install zsh nano \
