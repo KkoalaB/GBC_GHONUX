@@ -34,5 +34,12 @@ ENV LC_ALL en_US.UTF-8
 # python-pip: python library downloader (pip)
 # python3: python3
 # python3-pip: python library downloader (pip3)
+# curl: transferring data from or to a server designed to work without user interaction
 RUN set -xe \ 
-    && apt -y -qq install vim tmux wget tar man sudo net-tools git build-essential libcurses-perl python python-pip python3 python3-pip
+    && apt -y -qq install vim tmux wget tar man sudo net-tools git build-essential libcurses-perl python python-pip python3 python3-pip curl
+    
+RUN set -xe \
+    && zsh nano \
+    && wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
+
+CMD ["zsh"]
