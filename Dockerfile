@@ -1,4 +1,4 @@
-FROM    ubuntu:16.04
+FROM    ubuntu:18.04
 LABEL   authors="Byeongmin Ryoo <21600220@handong.edu>, Seungjun Baek <21900346@handong.edu>"
 
 # basic update & upgrade
@@ -36,7 +36,17 @@ ENV LC_ALL en_US.UTF-8
 # python3-pip: python library downloader (pip3)
 # curl: transferring data from or to a server designed to work without user interaction
 RUN set -xe \ 
-    && apt -y -qq install vim tmux wget tar man sudo net-tools git build-essential libcurses-perl python python-pip python3 python3-pip curl
+    && apt -y -qq install vim tmux wget tar man sudo net-tools git build-essential perl libcurses-perl python python-pip python3 python3-pip
+
+## For GBC_Secruity ##
+# pwndbg
+WORKDIR "/root"
+RUN git clone https://github.com/pwndbg/pwndbg
+RUN /root/pwndbg/setup.sh
+    
+# ROPgadget
+WORKDIR "/root"
+RUN pip install ropgadget
 
 # oh-my-zsh (Shell theme)
 RUN set -xe \
