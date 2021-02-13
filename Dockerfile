@@ -1,4 +1,4 @@
-FROM    ubuntu:16.04
+FROM    ubuntu:18.04
 LABEL   authors="Byeongmin Ryoo <21600220@handong.edu>, Seungjun Baek <21900346@handong.edu>"
 
 # basic update & upgrade
@@ -42,7 +42,9 @@ RUN set -xe \
 # pwndbg
 WORKDIR "/root"
 RUN git clone https://github.com/pwndbg/pwndbg
-RUN /root/pwndbg/setup.sh
+WORKDIR "/root/pwndbg"
+RUN set -xe \
+    && /root/pwndbg/setup.sh
     
 # ROPgadget
 WORKDIR "/root"
