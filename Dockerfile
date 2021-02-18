@@ -38,20 +38,36 @@ ENV LC_ALL en_US.UTF-8
 RUN set -xe \ 
     && apt -y -qq install vim tmux wget tar man sudo net-tools git build-essential libcurses-perl python python-pip python3 python3-pip curl
 
-## For GBC_Secruity ##
-# pwndbg
+### For GBC_Secruity ###
+## gdb-peda-pwndbg-gef all in one
+# https://infosecwriteups.com/pwndbg-gef-peda-one-for-all-and-all-for-one-714d71bf36b8
+# by this, you can excute peda, pwndbg, gef as like gdb-peda, gdb-pwndbg, gdb-gef
 WORKDIR "/root"
-RUN git clone https://github.com/pwndbg/pwndbg
-WORKDIR "/root/pwndbg"
+RUN git clone https://github.com/soaringk/gdb-peda-pwndbg-gef.git
+WORKDIR "/root/gdb-peda-pwndbg-gef"
+RUN ./install.sh
 RUN set -xe \
-    && /root/pwndbg/setup.sh
-    
-# ROPgadget
+    && cp gdbinit ./../".gdbinit"
+RUN set -xe \
+    && sudo cp gdb-peda /usr/bin/gdb-peda \
+    && sudo cp gdb-pwndbg /usr/bin/gdb-pwndbg \
+    && sudo cp gdb-gef /usr/bin/gdb-gef
+RUN set -xe \
+    && sudo chmod +x /usr/bin/gdb-*
+
+## Radare2
+WORKDIR "/root"
+RUN set -xe \
+    && sudo apt install -y radare2
+
+## ROPgadget
 WORKDIR "/root"
 RUN pip install ropgadget
 
-# bof
+## bof
 
+
+### Shell theme ###
 # oh-my-zsh (Shell theme)
 RUN set -xe \
     && apt -y -qq install zsh nano \
