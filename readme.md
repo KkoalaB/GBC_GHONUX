@@ -92,4 +92,13 @@ docker라는 가상머신을 통하여 어느 os에서든지 다른 os를 구동
 - 이미지 확인하기
     
     ```$ docker images```
+   
+- 파일 복사하기
+    - 로컬 파일을 docker 환경에서, 또는 반대의 상황에서 작업하고 싶은 경우가 있을 것입니다.
+    - 그런 경우, local -> docker 경우는
+        
+    ```$ docker cp <local_file_path> <docker_path> ```
     
+    - 반대의 경우에는 local 파일의 주소와 복사하여 둘 docker의 위치 만 서로 바꿔 명령어를 실행하면 됩니다.
+
+    ```$ docker cp <docekr_path> <local_file_path> ```
